@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.housecode.store.daos.ProductDAO;
 import br.com.housecode.store.models.BookType;
@@ -21,8 +22,9 @@ public class ProductsController {
 	private ProductDAO productDAO;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(Product product) {
+	public String save(Product product, RedirectAttributes redirectAttributes) {
 		productDAO.save(product);
+		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso");
 		System.out.println("Register the product " + product);
 		return "redirect:products";
 	}
