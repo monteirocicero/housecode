@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +9,17 @@
 <title>Registration products</title>
 </head>
 <body>
+
+	<spring:hasBindErrors name="product">
+		<ul>
+			<c:forEach var="error" items="${errors.allErrors}">
+				<li>
+					<spring:message code="${error.code}" text="${error.defaultMessage}"/>
+				</li>
+			</c:forEach>
+		</ul>
+	</spring:hasBindErrors>
+
 	<form method="post" action="/housecode/products">
 		<div>
 			<label for="title">Title</label>
