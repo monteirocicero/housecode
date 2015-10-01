@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Product {
@@ -29,6 +32,7 @@ public class Product {
 		this.id = id;
 	}
 
+	@NotBlank
 	public String getTitle() {
 		return title;
 	}
@@ -38,6 +42,7 @@ public class Product {
 	}
 
 	@Lob
+	@NotBlank
 	public String getDescription() {
 		return description;
 	}
@@ -46,6 +51,7 @@ public class Product {
 		this.description = description;
 	}
 
+	@Min(30)
 	public int getPages() {
 		return pages;
 	}
