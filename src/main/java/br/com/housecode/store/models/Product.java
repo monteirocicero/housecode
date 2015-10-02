@@ -25,6 +25,7 @@ public class Product {
 	private int pages;
 	private List<Price> prices = new ArrayList<>();
 	private Calendar releaseDate;
+	private String summary;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,6 +81,14 @@ public class Product {
 
 	public void setReleaseDate(Calendar releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+	public String getSummaryPath() {
+		return summary;
+	}
+
+	public void setSummaryPath(String summary) {
+		this.summary = summary;
 	}
 
 	@Override

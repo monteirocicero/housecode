@@ -1,13 +1,12 @@
 package br.com.housecode.store.controllers;
 
+import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.housecode.store.daos.ProductDAO;
 import br.com.housecode.store.models.BookType;
 import br.com.housecode.store.models.Product;
-import br.com.housecode.store.validation.ProductValidator;
 
 @Controller
 @Transactional
@@ -27,7 +25,8 @@ public class ProductsController {
 	private ProductDAO productDAO;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(@Valid Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public ModelAndView save(Part summary, @Valid Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		System.out.println(summary.getName() + "; " + summary.getHeader("content-disposition"));
 		if (bindingResult.hasErrors()) {
 			return form(product);
 		}

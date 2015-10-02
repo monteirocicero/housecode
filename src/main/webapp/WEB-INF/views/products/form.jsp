@@ -12,7 +12,7 @@
 <body>
 
 
-		<form:form method="post" action="/housecode/products" commandName="product">
+		<form:form method="post" action="/housecode/products" commandName="product" enctype="multipart/form-data">
 		<div>
 			<label for="title">Title</label>
 			<form:input type="text" name="title" id="title" path="title" />
@@ -32,6 +32,11 @@
 			<label for="pages">Pages Number</label>
 			<input type="text" name="pages" id="pages" />
 			<form:errors path="pages" />
+		</div>
+		<div>
+			<label for="summary">Sumario do livro</label>
+			<input type="file" name="summary" id="summary" />
+			<form:errors path="summaryPath" />
 		</div>
 		
 		<c:forEach items="${types}" var="bookType" varStatus="status">
