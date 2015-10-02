@@ -1,6 +1,7 @@
 package br.com.housecode.store.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -12,6 +13,8 @@ import javax.persistence.Lob;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Product {
@@ -21,6 +24,7 @@ public class Product {
 	private String description;
 	private int pages;
 	private List<Price> prices = new ArrayList<>();
+	private Calendar releaseDate;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,12 +73,22 @@ public class Product {
 		this.prices = prices;
 	}
 
+	@DateTimeFormat(iso = ISO.DATE)
+	public Calendar getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Calendar releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("[");
 		sb.append("Title=").append(getTitle()).append("; ")
 		.append("Description=").append(getDescription()).append("; ")
-		.append("Pages=").append(getPages())
+		.append("Pages=").append(getPages()).append("; ")
+		.append("ReleaseDate=").append(getReleaseDate())
 		.append("]");
 		return sb.toString();
 	}

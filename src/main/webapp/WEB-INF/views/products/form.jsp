@@ -19,10 +19,14 @@
 			<form:errors path="title" />
 		</div>
 		<div>
-
 			<label for="description">Description</label>
 			<form:textarea rows="10" cols="20" name="description" id="description" path="description"  />
 			<form:errors path="description" />
+		</div>
+		<div>
+			<label for="releaseDate">Data de lançamento</label>
+			<form:input path="releaseDate" type="date" />
+			<form:errors path="releaseDate" />
 		</div>
 		<div>
 			<label for="pages">Pages Number</label>
