@@ -1,6 +1,5 @@
 package br.com.housecode.store.controllers;
 
-import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,13 +23,18 @@ public class ProductsController {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private FileSaver fileSaver;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(Part summary, @Valid Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		System.out.println(summary.getName() + "; " + summary.getHeader("content-disposition"));
+	public ModelAndView save(MultipartFile summary, @Valid Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return form(product);
 		}
+		
+		String webPath= fileSaver.write("upload-imagens", summary);
+		product.setSummaryPath(webPath);
 		
 		productDAO.save(product);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso");
