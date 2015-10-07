@@ -24,4 +24,8 @@ public class ProductDAO {
 				.getResultList();
 	}
 
+	public Product find(Integer id) {
+		return manager.find(Product.class, id);
+	}
+
 }
