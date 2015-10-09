@@ -1,11 +1,13 @@
 package br.com.housecode.store.models;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +28,7 @@ public class Product {
 	private List<Price> prices = new ArrayList<>();
 	private Calendar releaseDate;
 	private String summary;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -64,7 +66,7 @@ public class Product {
 	public void setPages(int pages) {
 		this.pages = pages;
 	}
-	
+
 	@ElementCollection
 	public List<Price> getPrices() {
 		return prices;
@@ -94,12 +96,13 @@ public class Product {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("[");
-		sb.append("Title=").append(getTitle()).append("; ")
-		.append("Description=").append(getDescription()).append("; ")
-		.append("Pages=").append(getPages()).append("; ")
-		.append("ReleaseDate=").append(getReleaseDate())
-		.append("]");
+		sb.append("Title=").append(getTitle()).append("; ").append("Description=").append(getDescription()).append("; ")
+				.append("Pages=").append(getPages()).append("; ").append("ReleaseDate=").append(getReleaseDate())
+				.append("]");
 		return sb.toString();
 	}
 
+	public BigDecimal priceFor(BookType bookType) {
+		return prices.stream().filter(price -> price.getBookType().equals(bookType)).findFirst().get().getValue();
+	}
 }
