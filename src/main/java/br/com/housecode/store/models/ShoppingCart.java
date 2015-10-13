@@ -1,5 +1,6 @@
 package br.com.housecode.store.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -12,8 +13,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<ShoppingItem, Integer> items = new LinkedHashMap<ShoppingItem, Integer>();
 
 	public void add(ShoppingItem item) {

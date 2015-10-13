@@ -1,10 +1,15 @@
 package br.com.housecode.store.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-public class ShoppingItem {
+public class ShoppingItem implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Product product;
 	private BookType bookType;
 	private Integer productId;

@@ -29,7 +29,6 @@ public class ShoppingCartController {
 	public ModelAndView add(Integer productId, BookType bookType) {
 		ShoppingItem item = createItem(productId, bookType);
 		shoppingCart.add(item);
-		System.out.println("Quantity ==>" + shoppingCart.getQuantity());
 		return new ModelAndView("redirect:/products");
 		
 	}
@@ -38,6 +37,11 @@ public class ShoppingCartController {
 		Product product = productDAO.find(productId);
 		ShoppingItem item = new ShoppingItem(product, bookType);
 		return item;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String items() {
+		return "shoppingCart/items";
 	}
 	
 
