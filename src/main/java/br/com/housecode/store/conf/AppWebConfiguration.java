@@ -1,5 +1,11 @@
 package br.com.housecode.store.conf;
 
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +20,8 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.google.common.cache.CacheBuilder;
+
 import br.com.housecode.store.controllers.FileSaver;
 import br.com.housecode.store.controllers.HomeController;
 import br.com.housecode.store.daos.ProductDAO;
@@ -21,6 +29,7 @@ import br.com.housecode.store.models.ShoppingCart;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses={HomeController.class, ProductDAO.class, FileSaver.class, ShoppingCart.class})
+@EnableCaching
 public class AppWebConfiguration {
 	
 	@Bean
@@ -59,6 +68,14 @@ public class AppWebConfiguration {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+	
+	@Bean
+	public CacheManager cacheManager() {
+		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(5, TimeUnit.MINUTES);
+		GuavaCacheManager cacheManager = new GuavaCacheManager();
+		cacheManager.setCacheBuilder(builder);
+		return cacheManager;
 	}
 
 }
