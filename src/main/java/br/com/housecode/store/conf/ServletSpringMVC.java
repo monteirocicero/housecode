@@ -10,7 +10,7 @@ public class ServletSpringMVC extends
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return null;
+		return new Class[]{SecurityConfiguration.class};
 	}
 
 	@Override
@@ -18,7 +18,7 @@ public class ServletSpringMVC extends
 		return new Class[] {
 				AppWebConfiguration.class, 
 				JPAConfiguration.class, 
-				AmazonConfiguration.class
+				AmazonConfiguration.class,
 		};
 	}
 
