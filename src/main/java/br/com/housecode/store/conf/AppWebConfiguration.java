@@ -27,13 +27,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.google.common.cache.CacheBuilder;
 
 import br.com.housecode.store.controllers.FileSaver;
-import br.com.housecode.store.controllers.HomeController;
+import br.com.housecode.store.controllers.LoginController;
 import br.com.housecode.store.daos.ProductDAO;
+import br.com.housecode.store.daos.UserDAO;
 import br.com.housecode.store.models.ShoppingCart;
 import br.com.housecode.store.viewresolver.JsonViewResolver;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, ProductDAO.class, FileSaver.class, ShoppingCart.class})
+@ComponentScan(basePackageClasses={LoginController.class, ProductDAO.class, FileSaver.class, ShoppingCart.class, UserDAO.class})
 @EnableCaching
 public class AppWebConfiguration {
 	
