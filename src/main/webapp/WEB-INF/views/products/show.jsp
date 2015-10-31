@@ -1,21 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="UTF-8"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%-- <%@taglib tagdir="/WEB-INF/tags" prefix="customTags"%> --%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
 <customTags:page bodyClass="" title="">
 	<article id="${product.title}" itemscope
 		itemtype="http://schema.org/Book">
 		<header id="product-highlight" class="clearfix">
-			<li>
-				<a href="" rel="nofollow">Seu carrinho ${shoppingCart.quantity}</a>
-			</li>
 			<div id="product-overview" class="container">
 				<img itemprop="image" width="280px" height="395px"
-					src="${product.summaryPath}"
+					src=''
 					class="product-featured-image" alt="${product.title}">
 				<h1 class="product-title" itemprop="name">${product.title}</h1>
 				<p class="product-author">
@@ -33,7 +29,7 @@
 
 
 		<section class="buy-options clearfix">
-			<form:form servletRelativeAction="/shopping" cssClass="container" method="get">
+			<form:form servletRelativeAction="/shopping" cssClass="container">
 				<input type="hidden" value="${product.id}" name="productId"/>
 				<ul id="variants" class="clearfix">
 					<c:forEach items="${product.prices}" var="price">
@@ -73,9 +69,8 @@
 			<section class="data product-detail">
 				<h2 class="section-title">Dados do livro:</h2>
 				<p>
-					NÃºmero de paginas: <span itemprop="numberOfPages">${product.pages}</span>
+					Número de paginas: <span itemprop="numberOfPages">${product.pages}</span>
 				</p>
-
 
 				<p></p>
 				<p>

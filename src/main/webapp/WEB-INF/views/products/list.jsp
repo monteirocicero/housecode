@@ -10,6 +10,7 @@
 <title>Books List</title>
 </head>
 <body>
+	<spring:message code="users.welcome"  arguments="${user.name}"/>
 	<table>
 		<tr>
 			<td>Title</td>
