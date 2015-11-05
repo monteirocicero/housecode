@@ -1,13 +1,19 @@
 package br.com.housecode.store.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Price {
+public class Price implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5004493416161670602L;
+	
 	private BigDecimal value;
 	private BookType bookType;
 
