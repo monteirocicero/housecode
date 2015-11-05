@@ -4,14 +4,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import br.com.housecode.store.builders.ProductBuilder;
 import br.com.housecode.store.conf.DataSourceConfigurationTest;
@@ -43,6 +47,7 @@ public class ProductDAOTest {
 		BigDecimal value = productDAO.sumPricesPerType(BookType.PRINTED);
 		Assert.assertEquals(new BigDecimal(50).setScale(2), value);
 	}
+	
 	
 
 }
